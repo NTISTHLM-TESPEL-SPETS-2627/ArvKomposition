@@ -2,16 +2,11 @@
 
 GameObject character = new();
 
-
 character.Components.Add(new HealthSystem(character));
 character.Components.Add(new RegenSystem(character));
 
-class RegenSystem : Component
+class RegenSystem(GameObject parent) : Component(parent)
 {
-  public RegenSystem(GameObject parent) : base(parent)
-  {
-  }
-
   public override void Update()
   {
     HealthSystem? s = Parent.GetComponent<HealthSystem>();
@@ -23,14 +18,10 @@ class RegenSystem : Component
   }
 }
 
-class HealthSystem : Component
+class HealthSystem(GameObject parent) : Component(parent)
 {
   public int Hp;
   public int MaxHp;
-
-  public HealthSystem(GameObject parent) : base(parent)
-  {
-  }
 
   public void Hurt(int amount) { }
   public void Heal(int amount) { }
